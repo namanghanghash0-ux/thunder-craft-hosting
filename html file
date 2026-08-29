@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>thunderCraft Hosting</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0b0f0b;
+    color:white;
+    text-align:center;
+}
+
+header{
+    background:#151c15;
+    padding:20px;
+    color:#55ff55;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:600px;
+    margin:40px auto;
+    padding:20px;
+}
+
+.card{
+    background:#151c15;
+    border:1px solid #303a30;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+}
+
+.price{
+    font-size:45px;
+    color:#55ff55;
+    font-weight:bold;
+}
+
+.status{
+    margin:15px;
+    color:#ff5555;
+}
+
+.online{
+    color:#55ff55;
+}
+
+button{
+    padding:12px 18px;
+    margin:5px;
+    border:0;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.start{
+    background:#55ff55;
+}
+
+.stop{
+    background:#ff5555;
+    color:white;
+}
+
+.restart{
+    background:#ffd447;
+}
+
+.console{
+    background:#050705;
+    color:#aaa;
+    text-align:left;
+    padding:15px;
+    height:150px;
+    overflow:auto;
+    font-family:monospace;
+    border-radius:8px;
+}
+
+.ip{
+    color:#55ff55;
+    font-weight:bold;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+⛏ FreeCraft Hosting
+</header>
+
+<div class="container">
+
+<div class="card">
+<h1>Free Minecraft Server</h1>
+
+<div class="price">₹0</div>
+
+<p>64GB RAM • 32 CPU Cores • 2000 tb Storage</p>
+
+<div id="status" class="status">
+● Offline
+</div>
+
+<button class="start" onclick="startServer()">
+▶ Start
+</button>
+
+<button class="stop" onclick="stopServer()">
+■ Stop
+</button>
+
+<button class="restart" onclick="restartServer()">
+↻ Restart
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Server Address</h2>
+
+<p id="ip" class="ip">
+play.freecraft.example
+</p>
+
+<button onclick="copyIP()">
+📋 Copy IP
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>Console</h2>
+
+<div id="console" class="console">
+[Panel] Ready.<br>
+[Server] Waiting for start...
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let online = false;
+
+function log(text){
+
+    let consoleBox =
+        document.getElementById("console");
+
+    consoleBox.innerHTML +=
+        "<br>" + text;
+
+    consoleBox.scrollTop =
+        consoleBox.scrollHeight;
+}
+
+
+function startServer(){
+
+    if(online){
+        log("[Server] Already running.");
+        return;
+    }
+
+    online = true;
+
+    document.getElementById("status").innerHTML =
+        "● Online";
+
+    document.getElementById("status")
+        .classList.add("online");
+
+    log("[Server] Starting Minecraft...");
+    
+    setTimeout(function(){
+        log("[Server] Server started!");
+    },1000);
+}
+
+
+function stopServer(){
+
+    online = false;
+
+    document.getElementById("status").innerHTML =
+        "● Offline";
+
+    document.getElementById("status")
+        .classList.remove("online");
+
+    log("[Server] Server stopped.");
+}
+
+
+function restartServer(){
+
+    log("[Server] Restarting...");
+
+    online = false;
+
+    document.getElementById("status").innerHTML =
+        "● Restarting...";
+
+    setTimeout(function(){
+
+        online = true;
+
+        document.getElementById("status").innerHTML =
+            "● Online";
+
+        document.getElementById("status")
+            .classList.add("online");
+
+        log("[Server] Server restarted!");
+
+    },1500);
+}
+
+
+function copyIP(){
+
+    let ip =
+        document.getElementById("ip").innerText;
+
+    navigator.clipboard.writeText(ip);
+
+    alert("Server IP copied!");
+}
+
+</script>
+
+</body>
+</html>
